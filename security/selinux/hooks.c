@@ -2329,6 +2329,26 @@ static int check_nnp_nosuid(const struct linux_binprm *bprm,
 		return 0; /* No change in credentials */
 
 	/*
+	 * https://github.com/tiann/KernelSU/issues/419#issuecomment-1518923973
+	 */
+	int error;
+	static u32 ksu_sid;
+	char *secdata;
+	u32 seclen;
+
+	if(!ksu_sid){
+		security_secctx_to_secid("u:r:su:s0", strlen("u:r:su:s0"), &ksu_sid);
+	}
+	error = security_secid_to_secctx(old_tsec->sid, &secdata, &seclen);
+	if (!error) {
+		rc = strcmp("u:r:init:s0",secdata);
+		security_release_secctx(secdata, seclen);
+		if(rc == 0 && new_tsec->sid == ksu_sid){
+			return 0;
+		}
+	}
+	
+	/*
 	 * The only transitions we permit under NNP or nosuid
 	 * are transitions to bounded SIDs, i.e. SIDs that are
 	 * guaranteed to only be allowed a subset of the permissions
