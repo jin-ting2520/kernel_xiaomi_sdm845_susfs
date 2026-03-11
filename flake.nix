@@ -1,5 +1,5 @@
 {
-  description = "Kernel build environment for dipper (Xiaomi Mi 8, SDM845)";
+  description = "Kernel build environment for Xiaomi SDM845 devices";
 
   inputs = {
     # GCC version is determined by the nixpkgs revision pinned in flake.lock.
