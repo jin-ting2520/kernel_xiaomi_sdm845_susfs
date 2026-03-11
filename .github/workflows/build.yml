@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        device: [dipper, ursa, equuleus]
+        device: [dipper, ursa, equuleus, beryllium, perseus, polaris]
     outputs:
       kernel_version: ${{ steps.version.outputs.kernel_version }}
     steps:
