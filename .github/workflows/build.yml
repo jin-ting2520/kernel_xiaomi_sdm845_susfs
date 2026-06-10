@@ -1,4 +1,4 @@
-name: Build Kernel SUSFS
+name: Build Kernel SUSFS2.1
 
 on:
   # push:
@@ -65,7 +65,7 @@ jobs:
           path: AnyKernel3-${{ matrix.device }}-${{ env.KERNEL_VERSION }}.zip
 
   release:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     steps:
