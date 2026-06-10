@@ -1,10 +1,11 @@
 name: Build Kernel
 
 on:
-  push:
-    branches: [lineage-22.2-sukisu-susfs]
-  pull_request:
-    branches: [lineage-22.2-sukisu-susfs]
+  # push:
+  #   branches: [lineage-22.2-sukisu-susfs]
+  # pull_request:
+  #   branches: [lineage-22.2-sukisu-susfs]
+  workflow_dispatch:
 
 jobs:
   build:
